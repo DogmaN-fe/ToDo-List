@@ -1,3 +1,7 @@
+import '@/app/ui/reset.css';
+import {firaSans} from './ui/fonts'
+import styles from "./ui/global.module.css";
+
 export default function RootLayout({
   children,
 }: {
@@ -7,8 +11,9 @@ export default function RootLayout({
     <html lang="ru">
       <head>
         <title>ToDo List</title>
+
       </head>
-      <body>{children}</body>
+      <body className={`${firaSans.className} ${styles.body}`}>{children}</body>
     </html>
   );
 }

@@ -1,0 +1,24 @@
+.workspace__section{
+    height: 100%;
+    width: 370px;
+    padding: 20px;
+
+    border-radius: 15px;
+    border: 6px solid #1111113b;
+}
+
+.workspace__section_working{
+    background-color: #fdc2c2;
+}
+
+.workspace__section_done{
+    background-color: #c2fdc7;
+}
+
+.workspace__section_title{
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 40px;
+}

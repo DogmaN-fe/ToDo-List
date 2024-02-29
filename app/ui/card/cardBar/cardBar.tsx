@@ -1,5 +1,3 @@
-
-
 import { ReactElement, useState } from "react";
 import styles from "./cardBar.module.css";
 import clsx from "clsx";
@@ -9,24 +7,26 @@ export default function CardBar({
   title,
   date,
   currPosition,
-  cardKey,
+  reloadCards,
 }: {
   title: string;
   date: string;
   currPosition: string;
-  cardKey: string;
+  reloadCards: Function;
 }): ReactElement {
   const [position, setPosition] = useState(currPosition);
 
   const changePosition = (e: any) => {
     e.preventDefault();
     const newPosition = e.target.innerText;
-    
+    console.log(newPosition);
+
     setPosition(newPosition);
     removeFromLocalStorage(currPosition, title);
 
-    saveToLocalStorage(title, date, String(cardKey), newPosition);
+    saveToLocalStorage(title, date, newPosition);
 
+    reloadCards();
   };
 
   return (

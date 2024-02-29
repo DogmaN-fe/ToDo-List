@@ -1,27 +1,24 @@
 .card__cnahge_position {
   display: flex;
+  justify-content: space-between;
 }
 
 .move_to {
-  border: none;
-  background-color: #FFFFFF;
+  border-radius: 10%;
 
+  padding: 5px;
   margin: 0;
+  
+  background-color: #ffffffc5;
 
   transition: background-color 0.3s ease-in;
 }
 
 .move_to:hover{
-    background-color: #f5f5f5;
-}
-
-.move_to:not(:last-child) {
-  margin-right: 5px;
+  background-color: #d1d1d180;
 }
 
 .move_to_active{
-    background-color: #eeeeee;
-}
-.move_to:not(.move_to_active){
-  cursor: pointer;
+  background-color: #d1d1d180;
+  cursor:auto;
 }

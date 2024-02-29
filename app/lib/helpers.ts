@@ -12,16 +12,15 @@ import { ICardByLocalStorage } from "./types";
 export const saveToLocalStorage = (
   cardTitle: string,
   cardDate: string,
-  cardKey: string,
   position: string
 ): void => {
+  const cards = loadFromLocalStorage(position);
+  
   const card: ICardByLocalStorage = {
     cardTitle: cardTitle,
     cardDate: cardDate,
-    cardKey: cardKey,
+    cardKey: String(cards.length + 1),
   };
-
-  const cards = loadFromLocalStorage(position);
 
   cards.push(card);
 
@@ -54,7 +53,11 @@ export const removeFromLocalStorage = (
     cards = JSON.parse(str);
   }
 
-  cards = cards.filter(item => item.cardTitle !== cardTitle);
+  cards = cards.filter((item) => item.cardTitle !== cardTitle);
+
+  cards.forEach((el, index) => {
+    el.cardKey = String(index + 1);
+  });
 
   localStorage.setItem(`${position}-cards`, JSON.stringify(cards));
 };

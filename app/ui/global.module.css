@@ -1,14 +1,35 @@
+.body{
+  width: 100%;
+  height: 100%;
+
+  background-image: url(https://catherineasquithgallery.com/uploads/posts/2021-03/1614721776_159-p-foni-dlya-lichnikh-dnevnikov-195.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.37);
+  background-blend-mode: multiply;
+}
+
+.main {
+  padding-top: 60px;
+  width: 100%;
+}
+
 .workspace {
   display: flex;
   flex-direction: row;
   width: 100%;
 
-  grid-column-gap: 120px;
+  grid-column-gap: 2%;
   grid-template-columns: repeat(3, 1fr);
 
   justify-content: center;
 }
 
-.workspace__section {
-    
+.workspace_element{
+  align-self: flex-start;
 }
