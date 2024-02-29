@@ -22,14 +22,8 @@ export default function CardBar({
     e.preventDefault();
     const newPosition = e.target.innerText;
     
-
-    localStorage.setItem(
-      `cardCount-${newPosition}`,
-      String(Number(localStorage.getItem(`cardCount-${newPosition}`)) - 1)
-    );
-    
     setPosition(newPosition);
-    removeFromLocalStorage(currPosition, cardKey);
+    removeFromLocalStorage(currPosition, title);
 
     saveToLocalStorage(title, date, String(cardKey), newPosition);
 

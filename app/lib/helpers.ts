@@ -20,27 +20,23 @@ export const saveToLocalStorage = (
     cardDate: cardDate,
     cardKey: cardKey,
   };
-  const key: string = `card-${position}-${cardKey}`;
-  localStorage.setItem(`cardCount-${position}`, cardKey);
-  localStorage.setItem(key, JSON.stringify(card));
+
+  const cards = loadFromLocalStorage(position);
+
+  cards.push(card);
+
+  localStorage.setItem(`${position}-cards`, JSON.stringify(cards));
 };
 
 export const loadFromLocalStorage = (
   position: string
 ): ICardByLocalStorage[] => {
   let cards: ICardByLocalStorage[] = [];
-  let str: string = localStorage.getItem(`cardCount-${position}`) || "0";
 
-  const countCard: number = Number(str);
+  let str: string = localStorage.getItem(`${position}-cards`) || "";
 
-  for (let index = 0; index < countCard; index++) {
-    let str: string =
-      localStorage.getItem(`card-${position}-${index + 1}`) || "";
-    if (str !== "") {
-      let parseJSON = JSON.parse(str);
-
-      cards.push(parseJSON);
-    }
+  if (str !== "") {
+    cards = JSON.parse(str);
   }
 
   return cards;
@@ -48,7 +44,17 @@ export const loadFromLocalStorage = (
 
 export const removeFromLocalStorage = (
   position: string,
-  cardKey: string
+  cardTitle: string
 ): void => {
-  localStorage.removeItem(`card-${position}-${cardKey}`);
+  let cards: ICardByLocalStorage[] = [];
+
+  let str: string = localStorage.getItem(`${position}-cards`) || "";
+
+  if (str !== "") {
+    cards = JSON.parse(str);
+  }
+
+  cards = cards.filter(item => item.cardTitle !== cardTitle);
+
+  localStorage.setItem(`${position}-cards`, JSON.stringify(cards));
 };
