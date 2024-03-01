@@ -16,17 +16,18 @@ export default function CardBar({
 }): ReactElement {
   const [position, setPosition] = useState(currPosition);
 
+  // Функция смены секции картчоки
   const changePosition = (e: any) => {
     e.preventDefault();
     const newPosition = e.target.innerText;
-    console.log(newPosition);
 
-    setPosition(newPosition);
     removeFromLocalStorage(currPosition, title);
-
     saveToLocalStorage(title, date, newPosition);
-
+    
+    setPosition(newPosition);
     reloadCards();
+
+    setPosition(currPosition);
   };
 
   return (

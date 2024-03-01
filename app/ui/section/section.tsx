@@ -4,18 +4,18 @@ import { ReactElement, useCallback, useEffect, useState } from "react";
 import Card from "../card/card";
 import { loadFromLocalStorage } from "@/app/lib/helpers";
 import styles from "./section.module.css";
-import {firaSans} from '../../ui/fonts'
 import { clsx } from "clsx";
 
 export default function Section({
   title,
-  updateCards,
+  updatePosition,
 }: {
   title: string;
-  updateCards: Function;
+  updatePosition: Function;
 }): ReactElement {
   const [newCard, setNewCard] = useState<ReactElement[]>([]);
 
+  // Функция обновляет карточки при переносе одной карты в другую секцию
   const reloadCards = useCallback(() => {
     const cards = loadFromLocalStorage(title).map((el, index) => (
       <Card
@@ -23,14 +23,14 @@ export default function Section({
         date={el.cardDate}
         title={el.cardTitle}
         position={title}
-        cardKey={String(index + 1)}
         reloadCards={reloadCards}
       />
     ));
     setNewCard(cards);
-    updateCards(title);
-  }, [title, updateCards]);
+    updatePosition(title);
+  }, [title, updatePosition]);
 
+  // Загрузка карточек в секцию при рендеренге старницы
   useEffect(() => {
     const cards = loadFromLocalStorage(title).map((el, index) => (
       <Card
@@ -38,7 +38,6 @@ export default function Section({
         date={el.cardDate}
         title={el.cardTitle}
         position={title}
-        cardKey={String(index + 1)}
         reloadCards={reloadCards}
       />
     ));

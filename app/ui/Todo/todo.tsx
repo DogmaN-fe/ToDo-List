@@ -6,27 +6,28 @@ import { loadFromLocalStorage, saveToLocalStorage } from "@/app/lib/helpers";
 import styles from "./todo.module.css";
 
 export default function ToDo({
-  updateCards,
+  updatePosition,
 }: {
-  updateCards: Function;
+  updatePosition: Function;
 }): ReactElement {
   const [newCard, setNewCard] = useState<ReactElement[]>([]);
 
-  const reloadCards = useCallback(() => {
+  // Функция обновляет карточки при переносе одной карты в другую секцию
+  const reloadCards = useCallback((): void => {
     const cards = loadFromLocalStorage("ToDo").map((el, index) => (
       <Card
         key={index + 1}
         date={el.cardDate}
         title={el.cardTitle}
         position="ToDo"
-        cardKey={String(index + 1)}
         reloadCards={reloadCards}
       />
     ));
     setNewCard(cards);
-    updateCards('Some');
-  }, [updateCards]);
+    updatePosition("ToDo");
+  }, [updatePosition]);
 
+  // Загрузка карточек в секцию при рендеренге старницы
   useEffect(() => {
     const cards = loadFromLocalStorage("ToDo").map((el, index) => (
       <Card
@@ -34,19 +35,24 @@ export default function ToDo({
         date={el.cardDate}
         title={el.cardTitle}
         position="ToDo"
-        cardKey={String(index + 1)}
         reloadCards={reloadCards}
       />
     ));
     setNewCard(cards);
-  }, [reloadCards, updateCards]);
+  }, [reloadCards, updatePosition]);
 
-  const addToDo = (e: any) => {
+  /**
+   * Функция добовления карточки
+   */
+  const addToDo = (e: any): void => {
     e.preventDefault();
+
+    // Определяем данные для карточки
     const title: string = e.target[0].value;
     const date: Date = new Date();
     const cardKey = newCard.length + 1;
 
+    // Изменяем карточки на сайте
     setNewCard([
       ...newCard,
       <Card
@@ -54,17 +60,22 @@ export default function ToDo({
         date={date.toLocaleDateString()}
         title={title}
         position="ToDo"
-        cardKey={String(cardKey)}
         reloadCards={reloadCards}
       />,
     ]);
+
+    // Сохраняем карточку в LocalStorage
     saveToLocalStorage(title, date.toLocaleDateString(), "ToDo");
   };
 
   return (
     <div className={styles.workspace__section}>
       <h3 className={styles.workspace__section_title}>ToDo</h3>
-      <form className={styles.workspace__section_form} action="#" onSubmit={addToDo}>
+      <form
+        className={styles.workspace__section_form}
+        action="#"
+        onSubmit={addToDo}
+      >
         <label className={styles.workspace__section_input}>
           <input name="title" type="text" />
         </label>
