@@ -40,5 +40,7 @@
 }
 
 .workspace__section_form {
+  display: flex;
+
   margin-bottom: 20px;
 }
