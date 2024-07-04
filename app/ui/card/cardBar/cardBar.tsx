@@ -3,7 +3,7 @@ import styles from "./cardBar.module.css";
 import clsx from "clsx";
 import { removeFromLocalStorage, saveToLocalStorage } from "@/app/lib/helpers";
 
-export default function CardBar({
+const CardBar = ({
   title,
   date,
   currPosition,
@@ -13,8 +13,8 @@ export default function CardBar({
   date: string;
   currPosition: string;
   reloadCards: Function;
-}): ReactElement {
-  const [position, setPosition] = useState(currPosition);
+}): ReactElement => {
+  const [position, setPosition] = useState<string>(currPosition);
 
   // Функция смены секции картчоки
   const changePosition = (e: any) => {
@@ -23,7 +23,7 @@ export default function CardBar({
 
     removeFromLocalStorage(currPosition, title);
     saveToLocalStorage(title, date, newPosition);
-    
+
     setPosition(newPosition);
     reloadCards();
 
@@ -58,4 +58,6 @@ export default function CardBar({
       </button>
     </span>
   );
-}
+};
+
+export default CardBar;

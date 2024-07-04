@@ -2,7 +2,7 @@ import { ReactElement, useState } from "react";
 import CardBar from "./cardBar/cardBar";
 import styles from "./card.module.css";
 
-export default function Card({
+const Card = ({
   date,
   title,
   position,
@@ -12,8 +12,7 @@ export default function Card({
   title: string;
   position: string;
   reloadCards: Function;
-}): ReactElement {
-  
+}): ReactElement => {
   return (
     <span className={styles.card}>
       <h4 className={styles.card_title}>{title}</h4>
@@ -26,4 +25,6 @@ export default function Card({
       />
     </span>
   );
-}
+};
+
+export default Card;

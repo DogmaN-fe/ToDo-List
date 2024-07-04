@@ -1,12 +1,13 @@
-import "@/app/ui/reset.css";
-import { firaSans } from "./ui/fonts";
-import styles from "./ui/global.module.css";
+import "./reset.css";
+import { firaSans } from "./lib/fonts";
+import styles from "./global.module.css";
+import React, { ReactElement } from "react";
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): ReactElement => {
   return (
     <html lang="ru">
       <head>
@@ -15,4 +16,6 @@ export default function RootLayout({
       <body className={`${firaSans.className} ${styles.body}`}>{children}</body>
     </html>
   );
-}
+};
+
+export default RootLayout;
